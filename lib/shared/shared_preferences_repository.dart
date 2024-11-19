@@ -19,9 +19,12 @@ class SharedPreferencesRepository implements DatabaseRepository {
   }
 
   @override
-  Future<void> editItem(int index, String newItem) {
+  Future<void> editItem(int index, String newItem) async {
     // TODO: implement editItem
-    throw UnimplementedError();
+    if (newItem.isNotEmpty && !_items.contains(newItem)) {
+      _items[index] = newItem;
+    }
+    await prefs.setStringList("items", _items);
   }
 
 // get List with Items
