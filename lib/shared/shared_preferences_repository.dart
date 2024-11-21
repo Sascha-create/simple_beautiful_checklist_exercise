@@ -20,7 +20,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> editItem(int index, String newItem) async {
-    // TODO: implement editItem
+    
     if (newItem.isNotEmpty && !_items.contains(newItem)) {
       _items[index] = newItem;
     }
@@ -37,7 +37,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
   }
 
   @override
-  // TODO: implement itemCount
+  
   Future<int> get itemCount async {
     List<String> allItems = await prefs.getStringList("items") ?? [];
     return allItems.length;

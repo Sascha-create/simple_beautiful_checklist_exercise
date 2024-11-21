@@ -11,7 +11,6 @@ void main() async {
   // Wird benötigt, um auf SharedPreferences zuzugreifen
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: Hier statt MockDatabase() ein SharedPreferencesRepository() verwenden.
   final DatabaseRepository repository = SharedPreferencesRepository();
 
   runApp(MainApp(repository: repository));
@@ -31,7 +30,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
-        textTheme: GoogleFonts.robotoMonoTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.robotoMonoTextTheme(
+            ThemeData(brightness: Brightness.light)  // <-- Theme.of(context) war der Bug
+                .textTheme), 
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
